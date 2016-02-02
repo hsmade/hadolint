@@ -14,6 +14,11 @@ RUN cabal install --only-dependencies -j4 --enable-tests \
 COPY . /opt/hadolint
 RUN cabal install
 
+RUN apt-get remove --purge cabal-install ghc happy alex \
+            stack zlib1g-dev libtinfo-dev \
+            libsqlite3-0 libsqlite3-dev ca-certificates g++ \
+            hlint
+
 ENV PATH="/root/.cabal/bin:$PATH"
 CMD ["hadolint", "-i"]
 
